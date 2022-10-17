@@ -156,7 +156,7 @@ def get_activity_name(actId):
     query = '''
     select Name
     from Activity where ActId is ?'''
-    return cur.execute(query, (name,)).fetchall()[0][0]
+    return cur.execute(query, (actId,)).fetchall()[0][0]
 
 def get_activity_details(actId):
     query = '''
