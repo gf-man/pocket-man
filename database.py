@@ -55,7 +55,7 @@ def get_variable_name(varId):
     query = '''
     select Name
     from Variables where VarId is ?'''
-    return cur.execute(query, (name,)).fetchall()[0][0]
+    return cur.execute(query, (varId,)).fetchall()[0][0]
 
 def get_variable_details(varId):
     query = '''
@@ -104,7 +104,7 @@ def get_income_name(inId):
     query = '''
     select Name
     from Income where InId is ?'''
-    return cur.execute(query, (name,)).fetchall()[0][0]
+    return cur.execute(query, (inId,)).fetchall()[0][0]
 
 def get_income_details(inId):
     query = '''
@@ -123,7 +123,7 @@ def update_income(inId, name=None, category=None, amount=None, payInDate=None, a
     if not amount: amount = data[3]
     if not payInDate: payInDate = data[4]
     if not actId: actId = data[5]
-    cur.execute(query, (name, category, budget, priority, inId))
+    cur.execute(query, (name, category, amount, payInDate, actId))
 
 def remove_income(inId):
     query = '''
@@ -208,7 +208,7 @@ def get_expense_name(exId):
     query = '''
     select Name
     from Expense where ExId is ?'''
-    return cur.execute(query, (name,)).fetchall()[0][0]
+    return cur.execute(query, (exId,)).fetchall()[0][0]
 
 def get_expense_details(exId):
     query = '''
@@ -221,7 +221,7 @@ def update_expense(eqId, name=None, category=None, url=None, desc=None, cost=Non
     update Expense
     set Name=?, Category=?, URL=?, Description=?, Cost=?, PayOutDate=?, ActId=?))
     where id is ?'''
-    data = get_eqpense_details(eqId)
+    data = get_expense_details(eqId)
     if not name: name = data[1]
     if not category: category = data[2]
     if not url: url = data[3]
@@ -262,7 +262,7 @@ def get_equipment_name(eqId):
     query = '''
     select Name
     from Equipment where ActId is ?'''
-    return cur.execute(query, (name,)).fetchall()[0][0]
+    return cur.execute(query, (eqId,)).fetchall()[0][0]
 
 def get_equipment_details(eqId):
     query = '''
